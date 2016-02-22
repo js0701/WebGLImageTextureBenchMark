@@ -40,7 +40,17 @@
 <script type="text/javascript">
 
     var gl;
-	var useImageData = false;
+	var useImageData = true;
+
+    var growingInteger = 0;
+
+    function growInteger()
+    {
+        growingInteger++;
+        document.getElementById("indicator").innerHTML = growingInteger;
+    }
+
+    var interval =  setInterval(growInteger, 10);
 
     function initGL(canvas) {
         try {
@@ -159,10 +169,10 @@
 		if(useImageData)
 		{
            neheTexture.image.onload = function () {
-		    ImageData.createFromSource(neheTexture.image).then(
-			function(imageData)
+		    window.createImageBitmap(neheTexture.image).then(
+			function(imageBitmap)
 			{
-			   handleLoadedTexture(neheTexture, imageData);
+			   handleLoadedTexture(neheTexture, imageBitmap);
 			},
 			function(msg)
 			{
@@ -186,10 +196,10 @@
 		if(useImageData)
 		{
             neheTexture5.image.onload = function () {
-		    ImageData.createFromSource(neheTexture5.image).then(
-			function(imageData)
+		    window.createImageBitmap(neheTexture5.image).then(
+			function(imageBitmap)
 			{
-			   handleLoadedTexture(neheTexture5, imageData);
+			   handleLoadedTexture(neheTexture5, imageBitmap);
 			},
 			function(msg)
 			{
@@ -202,6 +212,7 @@
 		{
         neheTexture5.image.onload = function () {
             handleLoadedTexture(neheTexture5);
+            imageDataHandle.releaseLocalBuffer();
         }
 		}
 
@@ -212,10 +223,10 @@
 		if(useImageData)
 		{
             neheTexture1.image.onload = function () {
-		    ImageData.createFromSource(neheTexture1.image).then(
-			function(imageData)
+		    window.createImageBitmap(neheTexture1.image).then(
+			function(imageBitmap)
 			{
-			   handleLoadedTexture(neheTexture1, imageData);
+			   handleLoadedTexture(neheTexture1, imageBitmap);
 			},
 			function(msg)
 			{
@@ -237,10 +248,10 @@
 		if(useImageData)
 		{
             neheTexture2.image.onload = function () {
-		    ImageData.createFromSource(neheTexture2.image).then(
-			function(imageData)
+		    window.createImageBitmap(neheTexture2.image).then(
+			function(imageBitmap)
 			{
-			   handleLoadedTexture(neheTexture2, imageData);
+			   handleLoadedTexture(neheTexture2, imageBitmap);
 			},
 			function(msg)
 			{
@@ -262,10 +273,10 @@
 		if(useImageData)
 		{
             neheTexture3.image.onload = function () {
-		    ImageData.createFromSource(neheTexture3.image).then(
-			function(imageData)
+		    window.createImageBitmap(neheTexture3.image).then(
+			function(imageBitmap)
 			{
-			   handleLoadedTexture(neheTexture3, imageData);
+			   handleLoadedTexture(neheTexture3, imageBitmap);
 			},
 			function(msg)
 			{
@@ -287,10 +298,10 @@
 		if(useImageData)
 		{
             neheTexture4.image.onload = function () {
-		    ImageData.createFromSource(neheTexture4.image).then(
-			function(imageData)
+		    window.createImageBitmap(neheTexture4.image).then(
+			function(imageBitmap)
 			{
-			   handleLoadedTexture(neheTexture4, imageData);
+			   handleLoadedTexture(neheTexture4, imageBitmap);
 			},
 			function(msg)
 			{
@@ -523,6 +534,7 @@
             showtime += " ms";
 
             document.getElementById("ShowTime").innerHTML = showtime;
+            clearInterval(interval);
         }
         else if(frameCount == 1 && textureCount ==6)
         {
@@ -570,6 +582,10 @@
 <h1 id="ShowTime" style="color:red";>
 </h1>
 </div>
+<div>
+<h1 id="indicator" style="font-size:xx-large">
+<h1>
+<div>
 
 </body>
 
